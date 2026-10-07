@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[oc]
+.venv/
+build/
+dist/
+*.egg-info/
+
+# Local data and training products (the published models live in weights/)
+data/
+outputs/

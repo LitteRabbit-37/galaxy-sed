@@ -1,0 +1,33 @@
+[project]
+name = "galaxy-sed"
+version = "1.0.0"
+description = "Full spectral energy distributions and physical parameters of galaxies from 20-band photometry, with generative latent optimisation (GLO) and a conditional WGAN-GP"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "AGPL-3.0-only"
+authors = [{ name = "Florian" }]
+dependencies = [
+    "matplotlib>=3.10",
+    "numpy>=2.0",
+    "scikit-learn>=1.6",
+    "torch>=2.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["galaxy_sed"]
+
+# CUDA builds of PyTorch on Windows come from the PyTorch index, other
+# platforms use the default PyPI wheels.
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32'" },
+]

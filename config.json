@@ -1,0 +1,98 @@
+{
+  "bands": [
+    {"name": "GALEX FUV", "wavelength_micron": 0.153},
+    {"name": "GALEX NUV", "wavelength_micron": 0.229},
+    {"name": "INT u", "wavelength_micron": 0.355},
+    {"name": "INT r", "wavelength_micron": 0.650},
+    {"name": "INT i", "wavelength_micron": 0.791},
+    {"name": "INT z", "wavelength_micron": 0.908},
+    {"name": "Subaru N921", "wavelength_micron": 0.978},
+    {"name": "UKIRT J", "wavelength_micron": 1.241},
+    {"name": "UKIRT H", "wavelength_micron": 1.610},
+    {"name": "UKIRT K", "wavelength_micron": 2.170},
+    {"name": "Spitzer IRAC1", "wavelength_micron": 3.556},
+    {"name": "Spitzer IRAC2", "wavelength_micron": 4.501},
+    {"name": "Spitzer IRAC3", "wavelength_micron": 5.745},
+    {"name": "Spitzer IRAC4", "wavelength_micron": 7.918},
+    {"name": "Spitzer MIPS24", "wavelength_micron": 23.594},
+    {"name": "Herschel PACS100", "wavelength_micron": 100.0},
+    {"name": "Herschel PACS160", "wavelength_micron": 160.0},
+    {"name": "Herschel SPIRE250", "wavelength_micron": 250.0},
+    {"name": "Herschel SPIRE350", "wavelength_micron": 350.0},
+    {"name": "Herschel SPIRE500", "wavelength_micron": 500.0}
+  ],
+  "data": {
+    "require_starburst": true,
+    "split_seed": 42,
+    "split_fractions": [0.8, 0.1, 0.1],
+    "targets": [
+      {"name": "redshift", "log10": false},
+      {"name": "metallicity", "log10": false},
+      {"name": "sb_tau_v", "log10": false},
+      {"name": "sb_age", "log10": true},
+      {"name": "sb_te", "log10": true},
+      {"name": "host_tv", "log10": false},
+      {"name": "host_psi", "log10": false},
+      {"name": "host_tau", "log10": true},
+      {"name": "host_iview", "log10": false},
+      {"name": "polar_T", "log10": false},
+      {"name": "f_host", "log10": true},
+      {"name": "f_sb", "log10": true},
+      {"name": "f_agn", "log10": true},
+      {"name": "f_pol", "log10": true},
+      {"name": "AGNpar_0", "log10": false},
+      {"name": "AGNpar_1", "log10": false},
+      {"name": "AGNpar_2", "log10": false},
+      {"name": "AGNpar_3", "log10": false}
+    ],
+    "polar_dependent_targets": ["polar_T", "f_pol"]
+  },
+  "direct_mlp": {
+    "seed": 42,
+    "epochs": 100,
+    "patience": 50,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "dropout": 0.1
+  },
+  "glo": {
+    "seed": 42,
+    "latent_dim": 32,
+    "epochs": 100,
+    "patience": 15,
+    "batch_size": 128,
+    "lr_generator": 0.001,
+    "lr_latent": 0.01
+  },
+  "inversion": {
+    "seed": 42,
+    "steps": 1000,
+    "restarts": 5,
+    "learning_rate": 0.05,
+    "chunk_size": 8192
+  },
+  "parameter_heads": {
+    "seed": 42,
+    "epochs": 300,
+    "patience": 50,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "dropout": 0.1,
+    "max_classes": 12,
+    "uncertainty": true
+  },
+  "cwgan": {
+    "seed": 42,
+    "latent_dim": 32,
+    "epochs": 100,
+    "batch_size": 128,
+    "n_critic": 5,
+    "lr_generator": 0.0001,
+    "lr_critic": 0.0004,
+    "betas": [0.0, 0.9],
+    "gradient_penalty": 10.0,
+    "validation_draws": 4,
+    "draws": 25,
+    "chunk_size": 1024
+  }
+}
